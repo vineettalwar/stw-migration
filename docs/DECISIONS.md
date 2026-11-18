@@ -29,3 +29,11 @@ A per-site file lease prevents interleaved browser and CLI migrations.
 Use source/destination wp-env environments for regression tests. Store plugin
 in stw-migration/ and development tooling at root; package only the plugin folder.
 Keep GPL/provenance; publish the initial snapshot to the user-provided repository.
+
+## 2026-11-18: Native .stwm format and understated workspace
+User chose a new STW format with legacy .wpress import support. Use standard ZIP
+with automatic ZIP64, manifest v1 and per-file SHA-256 instead of inventing a
+compression algorithm. Keep the tested restore pipeline behind a verified
+stream adapter. This adds staging I/O and is a beta compatibility tradeoff;
+large native stages are not yet time-sliced. Document the format publicly.
+Consolidate CSS and security modules rather than layering more overrides.

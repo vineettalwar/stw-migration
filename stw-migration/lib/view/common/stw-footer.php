@@ -1,2 +1,2 @@
-<footer class="stw-footer"><span>Made for moving forward.</span><span>Local files · No cloud account required</span></footer>
+<footer class="stw-footer"><span>Backups are stored on this server.</span><span>No cloud connection required.</span></footer>
 </div>

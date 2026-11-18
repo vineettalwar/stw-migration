@@ -57,7 +57,7 @@ function ai1wm_backup_path( $params ) {
 	}
 
 	// Validate archive path
-	if ( validate_file( $params['archive'] ) !== 0 || ! preg_match( '/^[^\\\\\/\x00-\x1f:]+\.wpress$/iD', $params['archive'] ) || is_link( AI1WM_BACKUPS_PATH . DIRECTORY_SEPARATOR . $params['archive'] ) ) {
+	if ( ! stw_is_archive_name( $params['archive'] ) || is_link( AI1WM_BACKUPS_PATH . DIRECTORY_SEPARATOR . $params['archive'] ) ) {
 		throw new Ai1wm_Archive_Exception( __( 'Invalid archive path. <a href="https://help.servmask.com/knowledgebase/invalid-archive-path/" target="_blank">Technical details</a>', AI1WM_PLUGIN_NAME ) );
 	}
 
@@ -76,8 +76,17 @@ function ai1wm_archive_path( $params ) {
 	}
 
 	// Validate archive path
-	if ( validate_file( $params['archive'] ) !== 0 || ! preg_match( '/^[^\\\\\/\x00-\x1f:]+\.wpress$/iD', $params['archive'] ) || is_link( AI1WM_BACKUPS_PATH . DIRECTORY_SEPARATOR . $params['archive'] ) ) {
+	if ( ! stw_is_archive_name( $params['archive'] ) || is_link( AI1WM_BACKUPS_PATH . DIRECTORY_SEPARATOR . $params['archive'] ) ) {
 		throw new Ai1wm_Archive_Exception( __( 'Invalid archive path. <a href="https://help.servmask.com/knowledgebase/invalid-archive-path/" target="_blank">Technical details</a>', AI1WM_PLUGIN_NAME ) );
+	}
+
+	// Native archives are verified into a private staging stream before the
+	// legacy restore pipeline runs. Never replace the user's original backup.
+	if ( strtolower( pathinfo( $params['archive'], PATHINFO_EXTENSION ) ) === 'stwm' ) {
+		$verified = stw_assert_safe_path( ai1wm_storage_path( $params ), 'verified.wpress' );
+		if ( is_file( $verified ) ) {
+			return $verified;
+		}
 	}
 
 	// Get archive path
@@ -356,7 +365,7 @@ function ai1wm_archive_file( $blog_id = null ) {
 	// Add unique identifier
 	$name[] = bin2hex( random_bytes( 8 ) );
 
-	return sprintf( '%s.wpress', strtolower( implode( '-', $name ) ) );
+	return sprintf( '%s.stwm', strtolower( implode( '-', $name ) ) );
 }
 
 /**

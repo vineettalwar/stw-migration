@@ -54,7 +54,7 @@ class Ai1wm_Export_Controller {
 		try {
 			// Ensure that unauthorized people cannot access export action
 			ai1wm_verify_secret_key( $secret_key );
-			$params = stw_authorize_job( $params, 'export', $priority );
+			$params = stw_authorize_job( $params, 'export' );
 		} catch ( Ai1wm_Not_Valid_Secret_Key_Exception $e ) {
 			wp_send_json_error( array( 'message' => $e->getMessage() ), 403 );
 		}

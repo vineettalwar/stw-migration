@@ -1,13 +1,16 @@
 # STW Migration
 
 Independent GPL-3.0-or-later fork of All-in-One WP Migration 6.77; source
-revision 2919b1b1c3e5bc7ee9ba61d8effcea2498859d22. Product: 1.0.0-beta.1.
+revision 2919b1b1c3e5bc7ee9ba61d8effcea2498859d22. Product: 1.1.0-beta.1.
 Repository: https://github.com/vineettalwar/stw-migration (main).
 
 ## Map
 - stw-migration/stw-migration.php: bootstrap, frontend early return, UI assets.
-- stw-migration/stw-security.php: safe paths, job authorization/serialization,
-  upload idempotency, safe serialized replacements, download and package checks.
+- stw-migration/stw-security.php: explicit loader for lib/stw/archive-security.php,
+  jobs.php and transfers.php. Shared filename policy, bounded state, database
+  advisory locks, safe uploads/downloads and serialized replacements.
+- stw-migration/lib/stw/class-stw-archive.php: ZIP/ZIP64 manifest v1, checksums,
+  verified adapter; new exports use .stwm, legacy .wpress imports remain.
 - stw-migration/lib/controller + model + vendor: retained migration pipeline.
 - stw-migration/lib/view: native app-style admin workspace and legacy progress JS.
 - tests/: security regressions, fixture/transfer helpers; .runtime is ignored.
@@ -27,10 +30,15 @@ finish restoring after login sessions are replaced. Job lease covers browser/CLI
 npm ci; npm run env:start; npm run test:security; npm run test:roundtrip.
 Build: npm run package. ZIP is in dist/ and excluded from Git. Test endpoints
 localhost:8897/8898, wp-env default admin/password. The previous Compose test
-stack was stopped; wp-env is canonical. 58 security assertions and eight
-cross-site restore checks pass. Browser export/upload/restore and HTTP guards
+stack was stopped; wp-env is canonical. 61 security and 34 native assertions pass; native and legacy restores each
+pass eight cross-site data checks. New modules pass the scoped PHPCS ruleset. Browser export/upload/restore and HTTP guards
 verified. Public frontend loads one plugin file and skips engine. No speed %
 claim. See TESTING.md and audit for precise verification and remaining limits.
 
 Skills used: wp-plugin-development, wordpress-security-validation,
 fable-methodology; frontend-design and agent-browser for the workspace/QA.
+
+Native format: docs/ARCHIVE-FORMAT.md. Requires ZIP and 64-bit PHP; MySQL/MariaDB
+advisory locks coordinate across workers. Large native conversion stages are not
+yet time-sliced. User requested understated UI: consolidated readable CSS, compact
+titles, muted colors and no marketing/illustrative hero.

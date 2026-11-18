@@ -28,8 +28,8 @@
 <?php if ( is_readable( AI1WM_STORAGE_PATH ) && is_writable( AI1WM_STORAGE_PATH ) ) : ?>
 <div class="ai1wm-import-messages" role="status" aria-live="polite"></div>
 <div class="ai1wm-import-form"><div class="hide-if-no-js"><div class="ai1wm-drag-drop-area" id="ai1wm-drag-drop-area">
-<div id="ai1wm-import-init"><span class="stw-upload-icon" aria-hidden="true">↥</span><h3>Drop your backup here</h3><p>A single .wpress file, ready to unpack.</p>
-<label id="ai1wm-import-file" class="stw-primary" for="ai1wm-select-file">Choose a backup<input type="file" id="ai1wm-select-file" accept=".wpress" aria-label="Choose a .wpress backup" /></label>
+<div id="ai1wm-import-init"><span class="stw-upload-icon" aria-hidden="true">↥</span><h3>Drop your backup here</h3><p>STW .stwm and legacy .wpress files are supported.</p>
+<label id="ai1wm-import-file" class="stw-primary" for="ai1wm-select-file">Choose a backup<input type="file" id="ai1wm-select-file" accept=".stwm,.wpress" aria-label="Choose a .stwm or .wpress backup" /></label>
 </div></div></div></div>
 <p class="stw-caption">Uploads in small chunks. Available server space and hosting limits apply.</p>
 <?php else : ?>

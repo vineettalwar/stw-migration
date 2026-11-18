@@ -9,7 +9,7 @@ SQL value rewriting, lifecycle, update/support integrations, and admin assets.
 | Finding | Remediation | Evidence |
 | --- | --- | --- |
 | Permanent secret alone authorized new jobs and deletion | Admin + nonce for new jobs/deletion; per-archive continuation marker and 24-hour expiration | Regression suite and HTTP 403 checks |
-| Requests could overlap unrelated migrations | Site-specific locked job lease; shared by browser and CLI; cleaned jobs release their lease | Concurrent job regression and round-trip |
+| Requests could overlap unrelated migrations | Private job lease metadata with a MySQL/MariaDB advisory mutex; shared by browser and CLI | Concurrent job regression and round-trip |
 | Storage `.` / `..` could resolve to dangerous cleanup targets | Strict bounded storage identifier; safe path checks | Path regressions |
 | Archive names could select unrelated files | Single .wpress filename, symlink checks, canonical destination construction | Path regressions |
 | Archive member paths could escape the extraction root | Reject absolute paths, parent traversal, wrappers and symlinks before mkdir/write | Malicious archive regressions |
@@ -65,3 +65,30 @@ this plugin is not a boundary against another compromised PHP process.
   added; the responsive workspace uses native HTML/CSS and a small keyboard helper.
 - Changes reduce frontend work, file count and logging I/O. No end-to-end migration
   speed percentage is claimed without representative large-site benchmarks.
+
+## 1.1.0-beta.1 follow-up
+
+New exports use a real .stwm ZIP/ZIP64 container with manifest v1 and per-file
+SHA-256 checksums. The native import adapter verifies every byte before exposing
+a private stream to the restore pipeline. Wrong versions, inventories, sizes,
+compression methods, hashes, encrypted entries, symlinks and unsafe paths fail
+before restore. Existing output files are preserved on rejected conversion.
+Legacy .wpress imports remain supported and were tested with an original archive
+created before the native format existed, as well as generated round-trip data.
+
+61 security assertions and 34 native-format assertions pass. Both native and
+legacy cross-site restores pass eight data invariants each. Native browser export
+and upload/restore pass. New STW modules pass the scoped PHPCS ruleset; the legacy
+engine is not claimed to be fully coding-standard compliant.
+
+Independent-worker testing exposed ineffective filesystem advisory exclusion on
+the development bind mount. Coordination now uses prepared MySQL/MariaDB
+GET_LOCK/RELEASE_LOCK calls, scoped by database/prefix and job/stage. Independent
+database-session exclusion is verified. The database must support these calls;
+drop-in/replica routing configurations remain unverified. Job state is bounded
+and schema-checked; symlinked metadata is rejected. Existing path protections
+were retained.
+
+Native stages add I/O and are not yet time-sliced or persistently resumable after
+process death. This is a testing release, with no migration speed improvement
+percentage claimed. Read ARCHIVE-FORMAT.md before using large native archives.

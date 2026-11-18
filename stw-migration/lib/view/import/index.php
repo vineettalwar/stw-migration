@@ -30,14 +30,14 @@
 	<div class="ai1wm-row">
 		<div class="ai1wm-left">
 			<div class="ai1wm-holder">
-<h2 class="stw-panel-title">Restore from a file</h2>
+				<h2 class="stw-panel-title">Upload backup</h2>
 
 
 				<div class="stw-warning"><strong>This replaces the current site.</strong> Content, users, and settings will come from your backup. Keep a separate copy of this site before continuing. You’ll confirm before restoration begins.</div>
 				<form action="" method="post" id="ai1wm-import-form" class="ai1wm-clear" enctype="multipart/form-data">
 
 					<p>
-						<?php esc_html_e( 'Choose a backup created with STW Migration or a compatible .wpress exporter.', AI1WM_PLUGIN_NAME ); ?><br />
+						<?php esc_html_e( 'Choose an STW backup or a compatible legacy .wpress file.', AI1WM_PLUGIN_NAME ); ?><br />
 					</p>
 
 					<?php do_action( 'ai1wm_import_left_options' ); ?>

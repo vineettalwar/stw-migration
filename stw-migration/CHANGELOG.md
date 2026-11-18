@@ -1,5 +1,18 @@
 # STW Migration changes
 
+## 1.1.0-beta.1 — 2026-11-18
+
+- Introduce real .stwm ZIP/ZIP64 containers with versioned manifests and per-file
+  SHA-256 checksums; preserve legacy .wpress imports through the existing parser.
+- Verify native payloads before passing data to the tested restore pipeline.
+- Add format/inventory/version/path/integrity tests and both-format round trips.
+- Serialize native packaging/verification against overlapping retries.
+- Centralize archive-name validation and split archive, job and transfer concerns
+  into explicit modules; reject malformed or symlinked job metadata.
+- Replace patched/minified workspace CSS with readable, consolidated rules; use
+  understated colors, compact typography, simple labels and no decorative hero.
+- Read the release version from the plugin header when packaging.
+
 ## 1.0.0-beta.1 — 2026-11-18
 
 - Fork All-in-One WP Migration 6.77 and retain GPL-3.0-or-later, original notices

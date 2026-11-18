@@ -1,16 +1,16 @@
 # STW Migration
 
-A focused WordPress workspace for creating a portable site backup, restoring a
-.wpress archive, and managing local backups. Runs inside WordPress admin with no
+A focused WordPress workspace for creating a portable site backup, restoring an
+STW or legacy WPress archive, and managing local backups. Runs inside WordPress admin with no
 cloud account, external fonts, frontend framework, or JavaScript build step.
 
-**Testing beta: 1.0.0-beta.1.** Use disposable sites while evaluating migrations.
-Requires PHP 8.1+; verified on WordPress 7.1.2 and PHP 8.3.35.
+**Testing beta: 1.1.0-beta.1.** Use disposable sites while evaluating migrations.
+Requires PHP 8.1+ (64-bit) and the PHP ZIP extension for native archives; verified on WordPress 7.1.2 and PHP 8.3.35.
 
 ## Install
 
 Run `python3 scripts/package.py`, then upload the generated
-`dist/stw-migration-1.0.0-beta.1.zip` in WordPress → Plugins → Add Plugin.
+`dist/stw-migration-1.1.0-beta.1.zip` in WordPress → Plugins → Add Plugin.
 The installable plugin lives in `stw-migration/`; the repository root contains
 development tools and is not itself an installable plugin.
 Deactivate All-in-One WP Migration and its extensions before activating STW.
@@ -25,6 +25,7 @@ also exercised on Node 24.10/npm 11.6 with engine warnings for unused WASM tools
 npm ci
 npm run env:start
 npm run test:security
+npm run test:archive
 npm run test:roundtrip
 npm run package
 ```
@@ -35,10 +36,19 @@ Both use wp-env's disposable default credentials: `admin` / `password`.
 The round-trip test replaces the destination database and media. Never point
 these tests at a real site. See [TESTING.md](TESTING.md) for details.
 
+## Native backup format
+
+New exports use `.stwm`: a standard ZIP/ZIP64 container with directly inspectable
+files, a versioned manifest and SHA-256 integrity checks. Legacy `.wpress` imports
+remain supported. See [the format specification](docs/ARCHIVE-FORMAT.md).
+
+The native adapter verifies all files before the restore pipeline runs. It adds
+staging space and I/O; very large native stages are not yet time-sliced.
+
 ## Security and compatibility
 
 New web migration jobs and backup deletion require administrator permission and
-a nonce. Jobs are serialized per site, bound to an archive, and expire after
+a nonce. MySQL/MariaDB advisory locks serialize jobs per site, bound to an archive, and expire after
 24 hours. Authorized continuation requests can finish after a restored database
 replaces WordPress login sessions. Downloads pass through WordPress permission
 checks. Archive extraction rejects traversal and symlinks; upload retries do not
@@ -65,3 +75,7 @@ is an independent fork, not affiliated with or supported by ServMask.
 See [stw-migration/CHANGELOG.md](stw-migration/CHANGELOG.md) for dated changes.
 The internal archive version stays at 6.77 to preserve format/conversion rules;
 STW's release version is tracked separately.
+
+Code style for new STW modules is checked with `.phpcs.xml.dist` (WordPress Core
+standard, modern comparison style). Install PHPCS/WPCS and run `phpcs`; inherited
+engine/vendor files are outside this scoped style check.

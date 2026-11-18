@@ -34,7 +34,7 @@ define( 'AI1WM_DEBUG', false );
 // ==================
 define( 'AI1WM_VERSION', '6.77' );
 // Fork release version must not select upstream legacy database conversion paths.
-define( 'STW_MIGRATION_VERSION', '1.0.0-beta.1' );
+define( 'STW_MIGRATION_VERSION', '1.1.0-beta.1' );
 
 // ===============
 // = Plugin Name =

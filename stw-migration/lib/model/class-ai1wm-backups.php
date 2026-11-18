@@ -38,7 +38,7 @@ class Ai1wm_Backups {
 		}
 		// Backups are single files in this directory; never traverse other trees.
 		foreach ( new DirectoryIterator( AI1WM_BACKUPS_PATH ) as $item ) {
-			if ( $item->isDot() || $item->isLink() || ! $item->isFile() || strtolower( $item->getExtension() ) !== 'wpress' ) {
+			if ( $item->isDot() || $item->isLink() || ! $item->isFile() || ! stw_is_archive_name( $item->getFilename() ) ) {
 				continue;
 			}
 			$backups[] = array( 'path' => '', 'filename' => $item->getFilename(), 'mtime' => $item->getMTime(), 'size' => $item->getSize() );

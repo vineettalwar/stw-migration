@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ruleset name="STW new-code quality">
+    <description>WordPress Core style for STW-owned modules. Upstream engine is reviewed incrementally.</description>
+    <file>stw-migration/lib/stw</file>
+    <file>stw-migration/stw-security.php</file>
+    <arg name="basepath" value="."/>
+    <rule ref="WordPress-Core">
+        <!-- Keep readable modern comparisons; this is a style preference, not a security exclusion. -->
+        <exclude name="WordPress.PHP.YodaConditions"/>
+    </rule>
+</ruleset>

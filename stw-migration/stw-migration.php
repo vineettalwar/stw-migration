@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/vineettalwar/stw-migration
  * Description: Migration tool for all your blog data. Import or Export your blog content with a single click.
  * Author: STW Migration contributors (based on ServMask)
- * Version: 1.0.0-beta.1
+ * Version: 1.1.0-beta.1
  * Text Domain: stw-migration
  * License: GPL-3.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -99,6 +99,7 @@ require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'deprecated.php';
 require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'functions.php';
 
 require_once __DIR__ . '/stw-security.php';
+require_once __DIR__ . '/lib/stw/class-stw-archive.php';
 
 // Include exceptions
 require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'exceptions.php';

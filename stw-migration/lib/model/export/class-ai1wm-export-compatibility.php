@@ -26,6 +26,7 @@
 class Ai1wm_Export_Compatibility {
 
 	public static function execute( $params ) {
+		Stw_Archive::assert_supported();
 
 		// Set progress
 		Ai1wm_Status::info( __( 'Checking extensions compatibility...', AI1WM_PLUGIN_NAME ) );

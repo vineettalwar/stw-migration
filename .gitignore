@@ -4,6 +4,7 @@ dist/
 stw-migration/storage/
 tests/.runtime/
 *.wpress
+*.stwm
 *.log
 .DS_Store
 .wp-env.override.json

@@ -12,9 +12,13 @@ sites. wp-env's native database ports are dynamically assigned.
 serialized-data, metadata and job concurrency regressions. It creates temporary
 files and restores the migration secret it changes during testing.
 
+`npm run test:archive` runs 34 native container/integrity assertions, including
+independent PHP-worker locking. `phpcs` checks the new STW modules against the
+committed WordPress Core style ruleset when WPCS is installed.
+
 `npm run test:roundtrip` creates a Unicode post, media fixture and serialized
 option in the source; exports database/media; transfers the archive; adds data
-to the destination; restores there; checks all eight invariants. It intentionally
+to the destination; restores both .stwm and .wpress there; checks all eight invariants for each format. It intentionally
 replaces the destination database. Runtime fixtures live in tests/.runtime and
 are excluded from Git and the plugin ZIP.
 
@@ -24,9 +28,12 @@ their data; do that only when you intend to delete these disposable sites.
 ## Observed results (2026-11-18)
 
 - PHP syntax checks across plugin and regression files.
-- 58 security/integrity assertions passed.
-- Cross-site CLI restore: all eight content/data assertions passed; clean output.
-- Browser export: completed with a 52 MB full archive and a download action.
+- 61 security/integrity assertions passed.
+- Cross-site CLI restore: eight content/data assertions per format passed for
+  native .stwm and legacy .wpress. An original pre-native WPress archive was also
+  restored and verified directly.
+- Browser native export: completed with a 45 MB .stwm archive and a download action.
+- Native browser upload/restore completed after checksum verification.
 - Browser upload and restore: explicit confirmation and successful completion.
 - Authenticated download: HTTP 200, 150,085 bytes in the checked fixture.
 - Anonymous export, direct archive URL, deletion without nonce: HTTP 403.
@@ -52,3 +59,12 @@ job. If a process crashed and its browser cannot cancel, confirm no worker is
 running before an administrator removes that job's storage subdirectory; the
 lease becomes reusable when its marker is gone. Jobs otherwise expire after
 24 hours. This is not an automatic rollback mechanism.
+
+## Native format release limits
+
+Native .stwm containers require PHP ZIP, 64-bit PHP and MySQL/MariaDB advisory
+locks (GET_LOCK/RELEASE_LOCK). Checksums cover every payload file. The adapter
+adds intermediate staging I/O, and its packaging/integrity stages are not yet
+time-sliced for very large archives. See docs/ARCHIVE-FORMAT.md for exact limits.
+A fresh-process test verifies lock exclusion against a separate database session;
+filesystem flock alone was not reliable on the development bind mount.

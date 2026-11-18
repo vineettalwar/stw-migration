@@ -26,6 +26,30 @@
 
 class Ai1wm_Extractor extends Ai1wm_Archiver {
 
+	/** Yield validated file extents for native STW packaging. No file data is buffered. */
+	public function entries() {
+		if ( ! $this->is_valid() || fseek( $this->file_handle, 0 ) !== 0 ) {
+			throw new Ai1wm_Archive_Exception( 'Invalid legacy archive for STW packaging.' );
+		}
+		while ( ( $block = fread( $this->file_handle, 4377 ) ) !== '' ) {
+			if ( $block === false ) {
+				throw new Ai1wm_Archive_Exception( 'Cannot read legacy archive header.' );
+			}
+			if ( $block === $this->eof ) {
+				if ( ftell( $this->file_handle ) !== fstat( $this->file_handle )['size'] ) {
+					throw new Ai1wm_Archive_Exception( 'Unexpected data after legacy footer.' );
+				}
+				return;
+			}
+			$entry = $this->get_data_from_block( $block );
+			$entry['offset'] = ftell( $this->file_handle );
+			yield $entry;
+			if ( fseek( $this->file_handle, $entry['offset'] + $entry['size'] ) !== 0 ) {
+				throw new Ai1wm_Archive_Exception( 'Cannot seek to the next legacy entry.' );
+			}
+		}
+	}
+
 	/**
 	 * Total files count
 	 *

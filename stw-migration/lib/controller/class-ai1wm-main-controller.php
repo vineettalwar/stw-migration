@@ -145,6 +145,7 @@ class Ai1wm_Main_Controller {
 		// Add import commands
 		add_filter( 'ai1wm_import', 'Ai1wm_Import_Upload::execute', 5 );
 		add_filter( 'ai1wm_import', 'Ai1wm_Import_Compatibility::execute', 10 );
+		add_filter( 'ai1wm_import', 'Stw_Archive::prepare_import', 25 );
 		add_filter( 'ai1wm_import', 'Ai1wm_Import_Validate::execute', 50 );
 		add_filter( 'ai1wm_import', 'Ai1wm_Import_Confirm::execute', 100 );
 		add_filter( 'ai1wm_import', 'Ai1wm_Import_Blogs::execute', 150 );
@@ -637,7 +638,7 @@ class Ai1wm_Main_Controller {
 			'nonce' => wp_create_nonce( 'stw_migration' ),
 			),
 			'filters'     => array(
-				'ai1wm_archive_extension' => array( 'wpress' ),
+				'ai1wm_archive_extension' => array( 'stwm', 'wpress' ),
 				'ai1wm_archive_size'      => apply_filters( 'ai1wm_max_file_size', AI1WM_MAX_FILE_SIZE ),
 			),
 		) );
@@ -674,7 +675,7 @@ class Ai1wm_Main_Controller {
 			'problem_while_uploading_your_file'   => __( 'We are sorry, there seems to be a problem while uploading your file. Follow <a href="https://www.youtube.com/watch?v=mRp7qTFYKgs" target="_blank">this guide</a> to resolve it.', AI1WM_PLUGIN_NAME ),
 			'invalid_archive_extension'           => __(
 				'The file type that you have tried to upload is not compatible with this plugin. ' .
-				'Please ensure that your file is a <strong>.wpress</strong> file that was created with the All-in-One WP migration plugin. ' .
+				'Choose an STW <strong>.stwm</strong> backup or a compatible legacy <strong>.wpress</strong> backup. ' .
 				'<a href="https://help.servmask.com/knowledgebase/invalid-backup-file/" target="_blank">Technical details</a>',
 				AI1WM_PLUGIN_NAME
 			),

@@ -41,6 +41,10 @@ class Ai1wm_Export_Init {
 			$params['archive'] = ai1wm_archive_file( $blog_id );
 		}
 
+		if ( ! stw_is_archive_name( $params['archive'] ) || strtolower( pathinfo( $params['archive'], PATHINFO_EXTENSION ) ) !== 'stwm' ) {
+			throw new Ai1wm_Archive_Exception( 'New STW exports must use the .stwm extension.' );
+		}
+
 		// Set storage
 		if ( empty( $params['storage'] ) ) {
 			$params['storage'] = ai1wm_storage_folder();

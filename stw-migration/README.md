@@ -1,7 +1,7 @@
-# STW Migration 1.0.0-beta.1
+# STW Migration 1.1.0-beta.1
 
-Create a site backup, restore a .wpress file, and manage local backups from an
-app-style WordPress admin workspace. PHP 8.1+ required. Testing beta.
+Create a site backup, restore an STW or legacy WPress file, and manage local backups from an
+app-style WordPress admin workspace. PHP 8.1+ required. Native .stwm archives require 64-bit PHP and the ZIP extension. Testing beta.
 
 Install this folder as `wp-content/plugins/stw-migration` or upload the packaged
 ZIP. Deactivate All-in-One WP Migration and its extensions first. Open STW
@@ -32,3 +32,8 @@ archives, Windows and modern exporter compatibility remain unverified. Custom
 serialized object payloads are preserved without rewriting their internals.
 Symlinks are excluded; backup files must be in the backup directory itself.
 Abruptly interrupted restores are not automatically rolled back.
+
+Native STW format v1 uses standard ZIP/ZIP64, a versioned manifest and SHA-256
+file checksums. New exports use .stwm; .wpress imports remain supported. Native
+verification adds staging I/O and is not yet time-sliced for very large archives.
+The format specification and limitations are in the repository docs.

@@ -30,13 +30,15 @@
 	<div class="ai1wm-row">
 		<div class="ai1wm-left">
 			<div class="ai1wm-holder">
-<h2 class="stw-panel-title">Create a backup</h2>
+				<h2 class="stw-panel-title">Backup contents</h2>
 
 
 				<form action="" method="post" id="ai1wm-export-form" class="ai1wm-clear">
 
-					<div class="stw-transfer" aria-hidden="true"><div><span class="stw-site-icon">▤</span><strong>This WordPress site</strong><small>Content · Files · Database</small></div><span class="stw-transfer-arrow">⟶</span><div><span class="stw-archive-icon">↧</span><strong>One portable archive</strong><small>.wpress backup file</small></div></div>
-					<p class="stw-summary">Everything comes along by default. Choose what to leave behind in backup options.</p>
+					<ul class="stw-backup-scope" aria-label="Default backup contents">
+						<li>Database</li><li>Media</li><li>Themes</li><li>Plugins</li><li>.stwm archive</li>
+					</ul>
+					<p class="stw-summary">Includes your complete site. Use the options below to exclude content or replace text.</p>
 					<details class="stw-details"><summary>Find and replace text <span>Optional</span></summary>
 					<?php include AI1WM_TEMPLATES_PATH . '/export/find-replace.php'; ?>
 					</details>

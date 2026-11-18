@@ -30,7 +30,7 @@
 	<div class="ai1wm-row">
 		<div class="ai1wm-left">
 			<div class="ai1wm-holder">
-<h2 class="stw-panel-title">Your backup library</h2>
+				<h2 class="stw-panel-title">Saved backups</h2>
 
 
 				<form action="" method="post" id="ai1wm-backups-form" class="ai1wm-clear">

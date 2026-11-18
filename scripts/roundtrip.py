@@ -11,12 +11,14 @@ def run(target, *args):
     return result.stdout
 run('cli', 'eval-file', 'stw-tests/fixture.php', 'seed')
 output = run('cli', 'ai1wm', 'backup', '--exclude-themes', '--exclude-plugins')
-match = re.search(r'Backup location: .*/([^/\s]+\.wpress)', output)
+match = re.search(r'Backup location: .*/([^/\s]+\.stwm)', output)
 if not match:
     raise SystemExit('No successful archive path returned')
 run('cli', 'eval-file', 'stw-tests/transfer.php', 'stage', match[1])
-run('tests-cli', 'eval-file', 'stw-tests/fixture.php', 'destination')
-run('tests-cli', 'eval-file', 'stw-tests/transfer.php', 'receive')
-run('tests-cli', 'ai1wm', 'restore', 'roundtrip.wpress')
-run('tests-cli', 'eval-file', 'stw-tests/fixture.php', 'verify')
-print('PASS: cross-site export, restore, and content verification')
+for extension in ('stwm', 'wpress'):
+    run('tests-cli', 'eval-file', 'stw-tests/fixture.php', 'destination')
+    run('tests-cli', 'eval-file', 'stw-tests/transfer.php', 'receive', extension)
+    run('tests-cli', 'ai1wm', 'restore', 'roundtrip.' + extension)
+    run('tests-cli', 'eval-file', 'stw-tests/fixture.php', 'verify')
+    print('PASS: ' + extension + ' cross-site restore')
+print('PASS: native STW and legacy WPress migration compatibility')

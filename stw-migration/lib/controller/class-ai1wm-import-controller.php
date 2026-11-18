@@ -54,7 +54,7 @@ class Ai1wm_Import_Controller {
 		try {
 			// Ensure that unauthorized people cannot access import action
 			ai1wm_verify_secret_key( $secret_key );
-			$params = stw_authorize_job( $params, 'import', $priority );
+			$params = stw_authorize_job( $params, 'import' );
 		} catch ( Ai1wm_Not_Valid_Secret_Key_Exception $e ) {
 			wp_send_json_error( array( 'message' => $e->getMessage() ), 403 );
 		}

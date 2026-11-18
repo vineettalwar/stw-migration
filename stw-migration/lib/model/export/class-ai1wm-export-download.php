@@ -27,17 +27,41 @@ class Ai1wm_Export_Download {
 
 	public static function execute( $params ) {
 
-		// Set progress
-		Ai1wm_Status::info( __( 'Renaming exported file...', AI1WM_PLUGIN_NAME ) );
+		$lock = stw_lock_archive_stage( $params, 'export' );
+		if ( ! $lock ) {
+			usleep( 250000 );
+			$params['completed'] = false;
+			return $params;
+		}
+		try {
+			// Set progress
+			Ai1wm_Status::info( __( 'Renaming exported file...', AI1WM_PLUGIN_NAME ) );
 
-		// Open the archive file for writing
-		$archive = new Ai1wm_Compressor( ai1wm_archive_path( $params ) );
-
-		// Append EOF block
-		$archive->close( true );
-
-		// Rename archive file
-		if ( rename( ai1wm_archive_path( $params ), ai1wm_backup_path( $params ) ) ) {
+			$destination = ai1wm_backup_path( $params );
+			if ( ! is_file( $destination ) ) {
+				$source = ai1wm_archive_path( $params );
+				$reader = new Ai1wm_Extractor( $source );
+				$complete = false;
+				try {
+					foreach ( $reader->entries() as $entry ) { /* Validate record boundaries, not trailing zero bytes alone. */ }
+					$complete = true;
+				} catch ( Ai1wm_Archive_Exception $error ) {
+					$complete = false;
+				}
+				$reader->close();
+				if ( ! $complete ) {
+					$archive = new Ai1wm_Compressor( $source );
+					$archive->close( true );
+				}
+				Ai1wm_Status::info( 'Building STW archive and file checksums…' );
+				$temporary = stw_assert_safe_path( ai1wm_storage_path( $params ), 'export.partial' );
+				@unlink( $temporary );
+				Stw_Archive::create( $source, $temporary );
+				if ( ! rename( $temporary, $destination ) ) {
+					@unlink( $temporary );
+					throw new Ai1wm_Archive_Exception( 'Cannot save the completed STW backup.' );
+				}
+			}
 
 			$blog_id = null;
 
@@ -68,6 +92,10 @@ class Ai1wm_Export_Download {
 					$size
 				)
 			);
+
+			unset( $params['completed'] );
+		} finally {
+			stw_release_database_lock( $lock );
 		}
 
 		return $params;
