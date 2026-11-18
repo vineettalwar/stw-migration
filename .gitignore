@@ -1,0 +1,9 @@
+node_modules/
+dist/
+**/.code-review-graph/
+stw-migration/storage/
+tests/.runtime/
+*.wpress
+*.log
+.DS_Store
+.wp-env.override.json
