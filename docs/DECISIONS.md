@@ -44,3 +44,10 @@ an explicit internal adapter. Redirect legacy bookmarks before admin menu access
 validation. Use WordPress Settings API for three optional default exclusions;
 per-backup controls remain authoritative. Remove vendor artwork/promotions and
 the decorative hostname dot; preserve required copyright and GPL notices.
+
+## 2026-11-18: STW attribution and multisite priority
+User requested STW as displayed author and explicit GPL compliance. Preserve
+upstream copyright, GPL-3.0-or-later and third-party notices. User identified
+multisite source/destination backups as essential. Record the full transfer
+matrix in ROADMAP.md; current beta stays single-site until network permissions,
+mappings, user handling, isolation and recovery tests pass.

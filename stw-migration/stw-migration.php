@@ -3,7 +3,7 @@
  * Plugin Name: STW Migration
  * Plugin URI: https://github.com/vineettalwar/stw-migration
  * Description: Migration tool for all your blog data. Import or Export your blog content with a single click.
- * Author: STW Migration contributors (based on ServMask)
+ * Author: STW
  * Version: 1.2.0-beta.1
  * Text Domain: stw-migration
  * License: GPL-3.0-or-later

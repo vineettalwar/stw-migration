@@ -2,6 +2,8 @@
 
 ## 1.2.0-beta.1 — 2026-11-18
 
+- Display STW as the fork author; retain upstream copyright and GPL notices.
+
 - Add an STW-owned admin controller, canonical STW routes and compatible redirects.
 - Add Settings for default exclusions of spam comments, revisions and cache files;
   keep per-backup overrides and verify Settings API sanitization/persistence.

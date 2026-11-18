@@ -17,3 +17,8 @@ version from header; runtime and archives are ignored by Git.
 Read docs/ARCHIVE-FORMAT.md and AUDIT.md: native stages add I/O and are not yet
 time-sliced for very large archives. PHP ZIP, 64-bit PHP and DB advisory locks
 required. Nginx needs static deny rules. No production/large-host certification.
+
+Latest steering: displayed plugin Author is STW; upstream copyright/GPL notices
+remain. docs/ROADMAP.md proposes next-release features with multisite as P0 across
+whole-network restore and individual-site transfers in both directions. This is
+a proposal, not implemented multisite support; current guards remain enabled.

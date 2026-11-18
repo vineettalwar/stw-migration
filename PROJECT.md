@@ -50,3 +50,8 @@ The old controller no longer registers menus. Original legal text is retained;
 trademark header artwork and vendor promotions were removed. New admin routes
 are stw_backup/stw_restore/stw_library/stw_settings. Settings adds seven passing
 checks to the prior 95. No dot/hostname/eyebrow in the live header.
+
+Next-release proposals: docs/ROADMAP.md. Multisite is a user-mandated core
+requirement (whole network and individual-site ↔ single-site/network transfers).
+Not implemented or enabled in the current beta. Displayed Author is STW; original
+copyright/GPL/third-party notices and provenance remain preserved.
