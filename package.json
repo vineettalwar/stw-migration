@@ -1,6 +1,6 @@
 {
   "name": "stw-migration",
-  "version": "1.1.0-beta.1",
+  "version": "1.2.0-beta.1",
   "private": true,
   "description": "STW Migration WordPress plugin development and regression tests",
   "license": "GPL-3.0-or-later",
@@ -10,7 +10,8 @@
     "test:security": "wp-env run cli wp eval-file stw-tests/regression.php --user=admin",
     "package": "python3 scripts/package.py",
     "test:roundtrip": "python3 scripts/roundtrip.py",
-    "test:archive": "wp-env run cli wp eval-file stw-tests/native-archive.php"
+    "test:archive": "wp-env run cli wp eval-file stw-tests/native-archive.php",
+    "test:settings": "wp-env run cli wp eval-file stw-tests/settings.php --user=admin"
   },
   "devDependencies": {
     "@wordpress/env": "12.1.0"

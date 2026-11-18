@@ -1,4 +1,4 @@
-# STW Migration 1.1.0-beta.1
+# STW Migration 1.2.0-beta.1
 
 Create a site backup, restore an STW or legacy WPress file, and manage local backups from an
 app-style WordPress admin workspace. PHP 8.1+ required. Native .stwm archives require 64-bit PHP and the ZIP extension. Testing beta.

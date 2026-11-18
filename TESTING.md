@@ -68,3 +68,13 @@ adds intermediate staging I/O, and its packaging/integrity stages are not yet
 time-sliced for very large archives. See docs/ARCHIVE-FORMAT.md for exact limits.
 A fresh-process test verifies lock exclusion against a separate database session;
 filesystem flock alone was not reliable on the development bind mount.
+
+## 1.2 settings and admin layer
+
+`npm run test:settings`: seven assertions for normalization, unknown keys,
+checkbox values, persistence, form defaults and authorization independence.
+Together with 61 security and 34 native-format assertions: 102 checks pass.
+Browser save/default propagation and reset were verified; test preferences were
+restored to unchecked defaults. The legacy bookmarks redirect to canonical
+STW pages. Header dot/hostname and eyebrow are absent from the rendered page.
+Settings: http://localhost:8897/wp-admin/admin.php?page=stw_settings

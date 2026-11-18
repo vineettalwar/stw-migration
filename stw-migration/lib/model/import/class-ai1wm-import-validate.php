@@ -16,12 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * ███████╗███████╗██████╗ ██╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
- * ██╔════╝██╔════╝██╔══██╗██║   ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
- * ███████╗█████╗  ██████╔╝██║   ██║██╔████╔██║███████║███████╗█████╔╝
- * ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██║╚██╔╝██║██╔══██║╚════██║██╔═██╗
- * ███████║███████╗██║  ██║ ╚████╔╝ ██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
- * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
 
 class Ai1wm_Import_Validate {
@@ -94,9 +88,7 @@ class Ai1wm_Import_Validate {
 			throw new Ai1wm_Import_Exception(
 				sprintf(
 					__(
-						'The file that you are trying to import is over the maximum upload file size limit of <strong>%s</strong>.<br />' .
-						'You can remove this restriction by purchasing our ' .
-						'<a href="https://servmask.com/products/unlimited-extension" target="_blank">Unlimited Extension</a>.',
+						'This archive exceeds the configured import limit of <strong>%s</strong>.',
 						AI1WM_PLUGIN_NAME
 					),
 					size_format( $allowed_size )
@@ -127,7 +119,7 @@ class Ai1wm_Import_Validate {
 				throw new Ai1wm_Import_Exception(
 					__(
 						'Please make sure that your file was exported using <strong>All-in-One WP Migration</strong> plugin. ' .
-						'<a href="https://help.servmask.com/knowledgebase/invalid-backup-file/" target="_blank">Technical details</a>',
+						'<a href="https://github.com/vineettalwar/stw-migration/blob/main/docs/ARCHIVE-FORMAT.md" target="_blank">Technical details</a>',
 						AI1WM_PLUGIN_NAME
 					)
 				);

@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/vineettalwar/stw-migration
  * Description: Migration tool for all your blog data. Import or Export your blog content with a single click.
  * Author: STW Migration contributors (based on ServMask)
- * Version: 1.1.0-beta.1
+ * Version: 1.2.0-beta.1
  * Text Domain: stw-migration
  * License: GPL-3.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -29,12 +29,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * ███████╗███████╗██████╗ ██╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
- * ██╔════╝██╔════╝██╔══██╗██║   ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
- * ███████╗█████╗  ██████╔╝██║   ██║██╔████╔██║███████║███████╗█████╔╝
- * ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██║╚██╔╝██║██╔══██║╚════██║██╔═██╗
- * ███████║███████╗██║  ██║ ╚████╔╝ ██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
- * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
 
 // STW Migration fork modified 2026-11-18; original copyright retained above.
@@ -111,10 +105,13 @@ require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'loader.php';
 // = All app initialization is done in Ai1wm_Main_Controller __constructor =
 // =========================================================================
 $main_controller = new Ai1wm_Main_Controller();
+require_once __DIR__ . '/lib/stw/class-stw-settings.php';
+require_once __DIR__ . '/lib/stw/class-stw-admin.php';
+$stw_admin = new Stw_Admin( $main_controller );
 
 // Workspace styles load only on STW screens, after legacy engine styles.
 add_action( 'admin_enqueue_scripts', function ( $hook ) {
-	if ( strpos( $hook, 'ai1wm_' ) === false ) {
+	if ( ! Stw_Admin::is_screen( $hook ) ) {
 		return;
 	}
 	wp_enqueue_script( 'stw-workspace', plugins_url( 'lib/view/assets/javascript/stw-workspace.js', __FILE__ ), array(), STW_MIGRATION_VERSION, true );

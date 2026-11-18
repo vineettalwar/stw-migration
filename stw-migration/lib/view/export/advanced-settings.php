@@ -16,13 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * ███████╗███████╗██████╗ ██╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
- * ██╔════╝██╔════╝██╔══██╗██║   ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
- * ███████╗█████╗  ██████╔╝██║   ██║██╔████╔██║███████║███████╗█████╔╝
- * ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██║╚██╔╝██║██╔══██║╚════██║██╔═██╗
- * ███████║███████╗██║  ██║ ╚████╔╝ ██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
- * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
+
+$stw_defaults = Stw_Settings::get();
 ?>
 
 <div class="ai1wm-field-set">
@@ -35,13 +31,13 @@
 		<ul class="stw-options">
 			<li>
 				<label for="ai1wm-no-spam-comments">
-					<input type="checkbox" id="ai1wm-no-spam-comments" name="options[no_spam_comments]" />
+					<input type="checkbox" id="ai1wm-no-spam-comments" name="options[no_spam_comments]" <?php checked( $stw_defaults['no_spam_comments'] ); ?> />
 					<?php _e( 'Do <strong>not</strong> export spam comments', AI1WM_PLUGIN_NAME ); ?>
 				</label>
 			</li>
 			<li>
 				<label for="ai1wm-no-post-revisions">
-					<input type="checkbox" id="ai1wm-no-post-revisions" name="options[no_post_revisions]" />
+					<input type="checkbox" id="ai1wm-no-post-revisions" name="options[no_post_revisions]" <?php checked( $stw_defaults['no_post_revisions'] ); ?> />
 					<?php _e( 'Do <strong>not</strong> export post revisions', AI1WM_PLUGIN_NAME ); ?>
 				</label>
 			</li>
@@ -63,7 +59,6 @@
 					<label for="ai1wm-no-inactive-themes">
 						<input type="checkbox" id="ai1wm-no-inactive-themes" name="options[no_inactive_themes]" />
 						<?php _e( 'Do <strong>not</strong> export inactive themes (files)', AI1WM_PLUGIN_NAME ); ?>
-						<small style="color: red;"><?php _e( 'new', AI1WM_PLUGIN_NAME ); ?></small>
 					</label>
 				</li>
 			<?php endif; ?>
@@ -87,14 +82,12 @@
 					<label for="ai1wm-no-inactive-plugins">
 						<input type="checkbox" id="ai1wm-no-inactive-plugins" name="options[no_inactive_plugins]" />
 						<?php _e( 'Do <strong>not</strong> export inactive plugins (files)', AI1WM_PLUGIN_NAME ); ?>
-						<small style="color: red;"><?php _e( 'new', AI1WM_PLUGIN_NAME ); ?></small>
 					</label>
 				</li>
 				<li>
 					<label for="ai1wm-no-cache">
-						<input type="checkbox" id="ai1wm-no-cache" name="options[no_cache]" />
+						<input type="checkbox" id="ai1wm-no-cache" name="options[no_cache]" <?php checked( $stw_defaults['no_cache'] ); ?> />
 						<?php _e( 'Do <strong>not</strong> export cache (files)', AI1WM_PLUGIN_NAME ); ?>
-						<small style="color: red;"><?php _e( 'new', AI1WM_PLUGIN_NAME ); ?></small>
 					</label>
 				</li>
 			<?php endif; ?>

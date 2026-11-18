@@ -45,9 +45,7 @@
 	font-weight: 700;
 	letter-spacing: -.5px;
 }
-.stw-site, .stw-version { color: var(--stw-muted); font-size: 11px; }
-.stw-site { display: flex; align-items: center; gap: 8px; }
-.stw-site span { color: #647f70; font-size: 8px; }
+.stw-version { color: var(--stw-muted); font-size: 11px; }
 .stw-nav { display: flex; align-items: center; gap: 26px; border-bottom: 1px solid var(--stw-border); }
 .stw-nav a {
 	position: relative;
@@ -175,7 +173,6 @@
 @media (max-width: 700px) {
 	.stw-workspace { margin: 20px 12px 20px 0; }
 	.stw-brand { font-size: 15px; }
-	.stw-site { font-size: 10px; }
 	.stw-nav { gap: 22px; }
 	.stw-nav a { font-size: 12px; }
 	.stw-version { display: none; }
@@ -190,3 +187,9 @@
 @media (prefers-reduced-motion: reduce) {
 	.stw-workspace *, .ai1wm-modal-container * { animation: none !important; transition: none !important; }
 }
+
+.stw-settings-panel { padding: 25px 28px; border: 1px solid var(--stw-border); border-radius: 8px; background: #fff; }
+.stw-settings-panel h2 { margin: 0 0 8px; color: var(--stw-ink); font-size: 15px; }
+.stw-settings-panel p { color: var(--stw-muted); font-size: 13px; }
+.stw-settings-panel fieldset { margin: 22px 0; }
+.stw-setting-row { display: flex; align-items: center; gap: 8px; margin: 14px 0; }

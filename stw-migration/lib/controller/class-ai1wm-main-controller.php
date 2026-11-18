@@ -16,12 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * ███████╗███████╗██████╗ ██╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
- * ██╔════╝██╔════╝██╔══██╗██║   ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
- * ███████╗█████╗  ██████╔╝██║   ██║██╔████╔██║███████║███████╗█████╔╝
- * ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██║╚██╔╝██║██╔══██║╚════██║██╔═██╗
- * ███████║███████╗██║  ██║ ╚████╔╝ ██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
- * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
 
 class Ai1wm_Main_Controller {
@@ -176,18 +170,8 @@ class Ai1wm_Main_Controller {
 	 * @return void
 	 */
 	public function ai1wm_loaded() {
-		if ( ! defined( 'AI1WMME_PLUGIN_NAME' ) ) {
-			if ( is_multisite() ) {
-				add_action( 'network_admin_notices', array( $this, 'multisite_notice' ) );
-			} else {
-				add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-			}
-		} else {
-			if ( is_multisite() ) {
-				add_action( 'network_admin_menu', array( $this, 'admin_menu' ) );
-			} else {
-				add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-			}
+		if ( is_multisite() ) {
+			add_action( 'network_admin_notices', array( $this, 'multisite_notice' ) );
 		}
 
 		// Add automatic plugins update
@@ -451,54 +435,6 @@ class Ai1wm_Main_Controller {
 	}
 
 	/**
-	 * Register plugin menus
-	 *
-	 * @return void
-	 */
-	public function admin_menu() {
-		// Top-level WP Migration menu
-		add_menu_page(
-			'STW Migration',
-			'STW Migration',
-			'manage_options',
-			'ai1wm_export',
-			'Ai1wm_Export_Controller::index',
-			'dashicons-migrate',
-			'76.295'
-		);
-
-		// Sub-level Export menu
-		add_submenu_page(
-			'ai1wm_export',
-			__( 'Export', AI1WM_PLUGIN_NAME ),
-			__( 'Export', AI1WM_PLUGIN_NAME ),
-			'manage_options',
-			'ai1wm_export',
-			'Ai1wm_Export_Controller::index'
-		);
-
-		// Sub-level Import menu
-		add_submenu_page(
-			'ai1wm_export',
-			__( 'Import', AI1WM_PLUGIN_NAME ),
-			__( 'Import', AI1WM_PLUGIN_NAME ),
-			'manage_options',
-			'ai1wm_import',
-			'Ai1wm_Import_Controller::index'
-		);
-
-		// Sub-level Backups menu
-		add_submenu_page(
-			'ai1wm_export',
-			__( 'Backups', AI1WM_PLUGIN_NAME ),
-			__( 'Backups', AI1WM_PLUGIN_NAME ),
-			'manage_options',
-			'ai1wm_backups',
-			'Ai1wm_Backups_Controller::index'
-		);
-	}
-
-	/**
 	 * Register scripts and styles
 	 *
 	 * @return void
@@ -676,14 +612,12 @@ class Ai1wm_Main_Controller {
 			'invalid_archive_extension'           => __(
 				'The file type that you have tried to upload is not compatible with this plugin. ' .
 				'Choose an STW <strong>.stwm</strong> backup or a compatible legacy <strong>.wpress</strong> backup. ' .
-				'<a href="https://help.servmask.com/knowledgebase/invalid-backup-file/" target="_blank">Technical details</a>',
+				'<a href="https://github.com/vineettalwar/stw-migration/blob/main/docs/ARCHIVE-FORMAT.md" target="_blank">Technical details</a>',
 				AI1WM_PLUGIN_NAME
 			),
 			'invalid_archive_size'                => sprintf(
 				__(
-					'The file that you are trying to import is over the maximum upload file size limit of <strong>%s</strong>.<br />' .
-					'You can remove this restriction by purchasing our ' .
-					'<a href="https://servmask.com/products/unlimited-extension" target="_blank">Unlimited Extension</a>.',
+					'This archive exceeds the configured import limit of <strong>%s</strong>.',
 					AI1WM_PLUGIN_NAME
 				),
 				size_format( apply_filters( 'ai1wm_max_file_size', AI1WM_MAX_FILE_SIZE ) )

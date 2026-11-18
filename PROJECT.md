@@ -1,7 +1,7 @@
 # STW Migration
 
 Independent GPL-3.0-or-later fork of All-in-One WP Migration 6.77; source
-revision 2919b1b1c3e5bc7ee9ba61d8effcea2498859d22. Product: 1.1.0-beta.1.
+revision 2919b1b1c3e5bc7ee9ba61d8effcea2498859d22. Product: 1.2.0-beta.1.
 Repository: https://github.com/vineettalwar/stw-migration (main).
 
 ## Map
@@ -42,3 +42,11 @@ Native format: docs/ARCHIVE-FORMAT.md. Requires ZIP and 64-bit PHP; MySQL/MariaD
 advisory locks coordinate across workers. Large native conversion stages are not
 yet time-sliced. User requested understated UI: consolidated readable CSS, compact
 titles, muted colors and no marketing/illustrative hero.
+
+1.2 admin ownership: Stw_Admin registers canonical STW routes, engine asset
+adapters and early admin-menu legacy redirects. Stw_Settings owns the Settings
+API option and default checkbox selection. Defaults are UI-only and optional.
+The old controller no longer registers menus. Original legal text is retained;
+trademark header artwork and vendor promotions were removed. New admin routes
+are stw_backup/stw_restore/stw_library/stw_settings. Settings adds seven passing
+checks to the prior 95. No dot/hostname/eyebrow in the live header.

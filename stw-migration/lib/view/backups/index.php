@@ -16,12 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * ███████╗███████╗██████╗ ██╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
- * ██╔════╝██╔════╝██╔══██╗██║   ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
- * ███████╗█████╗  ██████╔╝██║   ██║██╔████╔██║███████║███████╗█████╔╝
- * ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██║╚██╔╝██║██╔══██║╚════██║██╔═██╗
- * ███████║███████╗██║  ██║ ╚████╔╝ ██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
- * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
 ?>
 
@@ -92,7 +86,7 @@
 								<?php _e( 'Your first backup starts here. Create a portable copy of your site to see it in this library.', AI1WM_PLUGIN_NAME ); ?>
 							</p>
 							<p>
-								<a href="<?php echo esc_url( network_admin_url( 'admin.php?page=ai1wm_export' ) ); ?>" class="ai1wm-button-green">
+								<a href="<?php echo esc_url( network_admin_url( 'admin.php?page=stw_backup' ) ); ?>" class="ai1wm-button-green">
 									<i class="ai1wm-icon-export"></i>
 									<?php _e( 'Create backup', AI1WM_PLUGIN_NAME ); ?>
 								</a>

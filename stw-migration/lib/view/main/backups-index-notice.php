@@ -15,12 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * ███████╗███████╗██████╗ ██╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
- * ██╔════╝██╔════╝██╔══██╗██║   ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
- * ███████╗█████╗  ██████╔╝██║   ██║██╔████╔██║███████║███████╗█████╔╝
- * ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██║╚██╔╝██║██╔══██║╚════██║██╔═██╗
- * ███████║███████╗██║  ██║ ╚████╔╝ ██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
- * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
 ?>
 
@@ -29,9 +23,9 @@
 		<?php
 		printf(
 			__(
-				'All in One WP Migration is not able to create <strong>%s</strong> file. ' .
+				'STW Migration is not able to create <strong>%s</strong> file. ' .
 				'Try to change permissions of the parent folder or send us an email at ' .
-				'<a href="mailto:support@servmask.com">support@servmask.com</a> for assistance.',
+				'your hosting administrator for assistance.',
 				AI1WM_PLUGIN_NAME
 			),
 			AI1WM_BACKUPS_INDEX

@@ -37,3 +37,10 @@ compression algorithm. Keep the tested restore pipeline behind a verified
 stream adapter. This adds staging I/O and is a beta compatibility tradeoff;
 large native stages are not yet time-sliced. Document the format publicly.
 Consolidate CSS and security modules rather than layering more overrides.
+
+## 2026-11-18: STW admin ownership and preferences
+Move menus/routes/settings into STW classes, retaining the migration engine as
+an explicit internal adapter. Redirect legacy bookmarks before admin menu access
+validation. Use WordPress Settings API for three optional default exclusions;
+per-backup controls remain authoritative. Remove vendor artwork/promotions and
+the decorative hostname dot; preserve required copyright and GPL notices.

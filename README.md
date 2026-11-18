@@ -4,13 +4,13 @@ A focused WordPress workspace for creating a portable site backup, restoring an
 STW or legacy WPress archive, and managing local backups. Runs inside WordPress admin with no
 cloud account, external fonts, frontend framework, or JavaScript build step.
 
-**Testing beta: 1.1.0-beta.1.** Use disposable sites while evaluating migrations.
+**Testing beta: 1.2.0-beta.1.** Use disposable sites while evaluating migrations.
 Requires PHP 8.1+ (64-bit) and the PHP ZIP extension for native archives; verified on WordPress 7.1.2 and PHP 8.3.35.
 
 ## Install
 
 Run `python3 scripts/package.py`, then upload the generated
-`dist/stw-migration-1.1.0-beta.1.zip` in WordPress → Plugins → Add Plugin.
+`dist/stw-migration-1.2.0-beta.1.zip` in WordPress → Plugins → Add Plugin.
 The installable plugin lives in `stw-migration/`; the repository root contains
 development tools and is not itself an installable plugin.
 Deactivate All-in-One WP Migration and its extensions before activating STW.
@@ -26,6 +26,7 @@ npm ci
 npm run env:start
 npm run test:security
 npm run test:archive
+npm run test:settings
 npm run test:roundtrip
 npm run package
 ```
@@ -79,3 +80,15 @@ STW's release version is tracked separately.
 Code style for new STW modules is checked with `.phpcs.xml.dist` (WordPress Core
 standard, modern comparison style). Install PHPCS/WPCS and run `phpcs`; inherited
 engine/vendor files are outside this scoped style check.
+
+## Preferences
+
+Open STW Migration → Settings to set default exclusions for spam comments, post
+revisions, and cache files. These preselect Create backup options; each backup
+can override them. CLI backup flags remain explicit. Nothing is excluded by
+default until you choose it. Settings use WordPress capability/nonce checks.
+
+STW owns its admin routes (`stw_backup`, `stw_restore`, `stw_library`,
+`stw_settings`), settings and workspace. Original page bookmarks redirect to
+the new routes. The tested inherited migration engine remains an internal
+adapter with its original copyright and GPL notices intact.
